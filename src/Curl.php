@@ -29,7 +29,7 @@ class Curl {
         return (preg_match('/^(http|https|ftp):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i', $url));
     }
     
-    protected function setUrl($url) {
+    public function setUrl($url) {
         if ($this->isValidUrl($url)) {
             $this->_url = $url;
             curl_setopt($this->_session, $this->_options['url'], $this->getUrl()); 
@@ -38,7 +38,7 @@ class Curl {
         }
     }
     
-    protected function getUrl() {
+    public function getUrl() {
         return $this->_url;    
     }
     
