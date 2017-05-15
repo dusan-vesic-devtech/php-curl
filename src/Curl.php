@@ -29,7 +29,7 @@ class Curl {
         return (preg_match('/^(http|https|ftp):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i', $url));
     }
     
-    protected function setUrl($url) {
+    public function setUrl($url) {
         if ($this->isValidUrl($url)) {
             $this->_url = $url;
             curl_setopt($this->_session, $this->_options['url'], $this->getUrl()); 
@@ -38,8 +38,32 @@ class Curl {
         }
     }
     
-    protected function getUrl() {
+    public function getUrl() {
         return $this->_url;    
+    }
+    
+    public function setOption($option, $value) {
+        curl_setopt(
+            $this->_session, $this->_options[$option], $value
+        );
+    }
+    
+    public function setOptionsArray($options = []) {
+        if (count($options) == 0) {
+            die("Empty array.");
+        }
+        
+        // if (array_key_exists('file', $options)) {
+        //     $handle = fopen($options['file'], 'w');
+        // }
+        
+        foreach ($options as $key => $value) {
+            if (!curl_setopt($this->_session, $this->_options[$key], $value)) {
+                return false;
+            } 
+        }
+        
+        return true;
     }
     
     public function exec($transferAsString = true) {
