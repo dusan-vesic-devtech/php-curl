@@ -32,10 +32,14 @@ class Curl {
     protected function setUrl($url) {
         if ($this->isValidUrl($url)) {
             $this->_url = $url;
-            curl_setopt($this->_session, $this->_options['url'], $this->_url); 
+            curl_setopt($this->_session, $this->_options['url'], $this->getUrl()); 
         } else {
             die('Not a valid url');
         }
+    }
+    
+    protected function getUrl() {
+        return $this->_url;    
     }
     
     public function exec($transferAsString = true) {
@@ -48,4 +52,5 @@ class Curl {
     public function __destruct() {
         curl_close($this->_session);
     }
+    
 }
