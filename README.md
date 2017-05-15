@@ -19,5 +19,5 @@ $curl->setOption('url', 'https://jsonplaceholder.typicode.com/users/1');
 
 $curl->setOptionsArray(['url'=>'https://jsonplaceholder.typicode.com/users/1', 'file'=>'json.txt']);
 
-$res = $o->exec(false); // write to the stdout
+$response = $curl->exec(false); // write to the stdout
 ```
